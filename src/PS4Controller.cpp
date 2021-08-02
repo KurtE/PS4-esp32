@@ -1,5 +1,5 @@
 #include "PS4Controller.h"
-
+#include <stdio.h>
 #include <esp_bt_defs.h>
 #include <esp_bt_main.h>
 
@@ -43,18 +43,21 @@ bool PS4Controller::begin() {
 
 bool PS4Controller::begin(char* mac) {
   esp_bd_addr_t addr;
+  unsigned int addrin[ESP_BD_ADDR_LEN];
     
-  if (sscanf(mac, ESP_BD_ADDR_STR, ESP_BD_ADDR_HEX_PTR(addr)) != ESP_BD_ADDR_LEN) {
+  if (sscanf(mac, ESP_BD_ADDR_STR, &addrin[0],&addrin[1],&addrin[2],&addrin[3],&addrin[4],&addrin[5]) != ESP_BD_ADDR_LEN) {
+  //if (sscanf(mac, ESP_BD_ADDR_STR, ESP_BD_ADDR_HEX_PTR(addr)) != ESP_BD_ADDR_LEN) {
     log_e("Could not convert %s\n to a MAC address", mac);
     return false;
   }
-
+  //convert the values to bytes
+  for (uint8_t i=0; i < ESP_BD_ADDR_LEN; i++) addr[i] = addrin[i];
   ps4SetBluetoothMacAddress(addr);
 
   return begin();
 }
 
-bool PS4Controller::end() {}
+bool PS4Controller::end() {return true;}
 
 bool PS4Controller::isConnected() { return ps4IsConnected(); }
 

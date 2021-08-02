@@ -3,6 +3,7 @@
 #include <esp_system.h>
 
 #include "ps4_int.h"
+#include <string.h>
 
 /********************************************************************************/
 /*                              C O N S T A N T S */

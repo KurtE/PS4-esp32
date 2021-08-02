@@ -8,7 +8,7 @@
 #include "ps4_int.h"
 #include "stack/bt_types.h"
 #include "stack/gap_api.h"
-
+#include <string.h>
 #define PS4_TAG "PS4_GAP"
 #define BTM_SEC_SERVICE_FIRST_EMPTY 51
 #define BT_DEFAULT_BUFFER_SIZE (4096 + 16)
